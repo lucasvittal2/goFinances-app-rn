@@ -5,8 +5,6 @@
     "name": "goFinances",
     "slug": "goFinances",
     "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "assetBundlePatterns": ["**/*"]
   }
 }
