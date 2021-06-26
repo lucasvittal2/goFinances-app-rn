@@ -28,8 +28,11 @@ interface formData {
   amount: string;
 }
 const schema = Yup.object().shape({
-  name: Yup.string().required("Nome é obrigatório"),
-  amount: Yup.number()
+  name: Yup
+  .string()
+  .required("Nome é obrigatório"),
+  amount: Yup
+    .number()
     .typeError("Informe um valor numérico")
     .positive("O Valor não pode ser negativo")
     .required("O valor é obrigatório"),
