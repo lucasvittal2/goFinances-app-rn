@@ -5,6 +5,7 @@
     "name": "goFinances",
     "slug": "goFinances",
     "version": "1.0.0",
-    "assetBundlePatterns": ["**/*"]
+    "assetBundlePatterns": ["**/*"],
+    "expo.ios.config.googleSignIn.reservedClientId":"1031429828207-pvmc17np19068l1pfrof5tqvkpo2o1pi.apps.googleusercontent.com"
   }
 }

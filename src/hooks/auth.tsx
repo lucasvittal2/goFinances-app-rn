@@ -1,5 +1,6 @@
 import React, { createContext, ReactNode, useContext, useState } from 'react';
 import * as GoogleSignIn from 'expo-google-sign-in';
+
 import { Alert, Platform} from 'react-native';
 
 interface AuthProviderProps{
@@ -30,13 +31,14 @@ function AuthProvider({ children }:AuthProviderProps ){
  
     
     async function initAsync(){
+        
         const androidClientId = '1031429828207-cguo5pnf25k5ugcbkemol6bvfcpdqf17.apps.googleusercontent.com';
         const IosClientId = '1031429828207-pvmc17np19068l1pfrof5tqvkpo2o1pi.apps.googleusercontent.com';
         
         console.log(Platform.OS === 'android'? androidClientId: IosClientId)
         await GoogleSignIn.initAsync({
             clientId: Platform.OS === 'android'? androidClientId: IosClientId,
-            scopes: ['profile', 'email'],
+            
             
         });
         syncWithStateAsync();
