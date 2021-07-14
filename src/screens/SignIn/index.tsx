@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { RFValue } from 'react-native-responsive-fontsize';
 import AppleSvg from '../../assets/apple.svg';
 import GoogleSvg from '../../assets/google-icon.svg';
@@ -15,13 +15,24 @@ import {
     FooterWrapper
  } from './styles';
 import { Alert } from 'react-native';
-export function SignIn(){
-    const { user, signInWithGoogle } = useAuth();
-    
 
-    async function handleSignWithGoogle(){
+
+
+export function SignIn(){
+    const {  signInWithGoogle, signInWithApple } = useAuth();
+    
+   
+    async function handleSignInWithGoogle(){
         try{
             await signInWithGoogle();
+        }catch(error){
+            console.log(error);
+            Alert.alert('Não foi possível conectar a conta google')
+        }
+    }
+    async function handleSignInWithApple(){
+        try{
+            await signInWithApple();
         }catch(error){
             console.log(error);
             Alert.alert('Não foi possível conectar a conta google')
@@ -36,26 +47,27 @@ export function SignIn(){
                         height = {RFValue(68)}
                     />
                     <Title>
-                        Controle suas{'\n'}
-                        finanças de forma{'\n'}
-                        muito simples
+                        Control your{'\n'}
+                        finances{'\n'}
+                        simply
                     </Title>
                 </TitleWrapper>
                 <SignInTitle>
-                    Faça seu login com{'\n'}
-                    uma das contas abaixo
+                login with one of the {'\n'}
+                accounts below
                 </SignInTitle>
             </Header>
             <Footer>
                 <FooterWrapper>
                     <SignInSocialButton
-                    title = "Entrar com Google"
+                    title = "Login with Google"
                     svg = {GoogleSvg}
-                    onPress = { handleSignWithGoogle }
+                    onPress = { handleSignInWithGoogle}
                     />
                     <SignInSocialButton
-                    title = "Entrar com Apple"
+                    title = "Login With Apple"
                     svg = {AppleSvg}
+                    onPress = { handleSignInWithApple }
                     />
                 </FooterWrapper>
 

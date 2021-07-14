@@ -3,7 +3,7 @@ import 'intl';
 import 'intl/locale-data/jsonp/pt-BR';
 import AppLoading from "expo-app-loading";
 import { ThemeProvider } from "styled-components";
-import { NavigationContainer } from "@react-navigation/native";
+import { Routes } from "./src/routes";
 import {
   useFonts,
   Poppins_400Regular,
@@ -33,12 +33,10 @@ export default function App() {
   }
   return (
     <ThemeProvider theme={theme}>
-      <NavigationContainer>
         <StatusBar barStyle= "light-content"/>
         <AuthProvider>
-          <SignIn />
+          <Routes />
         </AuthProvider>
-      </NavigationContainer>
     </ThemeProvider>
   );
 }

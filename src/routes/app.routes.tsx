@@ -40,7 +40,6 @@ const { Navigator, Screen} = createBottomTabNavigator();
                 ))
             }}
 
-            
             />
             <Screen
             name = "Cadastrar"
@@ -55,7 +54,6 @@ const { Navigator, Screen} = createBottomTabNavigator();
                 ))
             }}
 
-            
             />
             <Screen
             name = "Resumo"
