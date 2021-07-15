@@ -11,6 +11,7 @@ import * as AppleAuthentication from 'expo-apple-authentication';
 
 import { Alert, Platform} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import asyncStorage from '@react-native-async-storage/async-storage';
 
 
 const {CLIENT_ID} = process.env;
@@ -25,12 +26,14 @@ interface IAuthContextData{
     user: User;
     signInWithGoogle(): Promise<void>;
     signInWithApple(): Promise<void>;
+    signOut(): Promise<void>;
+    userStorageLoading: boolean;
 }
 interface User{
     id: string;
     name: string;
-    email: string |null;
-    photo?: string | undefined;
+    email: string ;
+    photo?: string ;
 }
 interface AuthorizationResponse {
     params: {
@@ -57,6 +60,7 @@ function AuthProvider({ children }:AuthProviderProps ){
         loadStorageData();
     }, []);
  // https://accounts.google.com/o/oauth2/v2/auth
+
     async function signInWithGoogle(){
         try{
             console.log('loging in...')
@@ -93,12 +97,14 @@ function AuthProvider({ children }:AuthProviderProps ){
                 ]
             });
             if(credential){
+                const name = credential.fullName!.givenName;
+                const photo =  `https://ui-avatars.com/api/?name=${name}&length=2`;
                 const userLogged = {
                     id: String(credential.user),
                     email: credential.email,
-                    name: credential.fullName!.givenName!,
-                    photo: undefined
-                };
+                    name,
+                    photo,
+                } as User;
                 setUser(userLogged);
                 await AsyncStorage.setItem(userStorageKey, JSON.stringify(userLogged));
             }
@@ -108,12 +114,18 @@ function AuthProvider({ children }:AuthProviderProps ){
 
     }
 
+    async function signOut(){
+        setUser({} as User);
+        await asyncStorage.removeItem(userStorageKey);
+    }
 
     return(
         <AuthContext.Provider value = {{
             user,
             signInWithGoogle,
-            signInWithApple
+            signInWithApple,
+            signOut,
+            userStorageLoading
             }}>
             { children }
         </AuthContext.Provider>

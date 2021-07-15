@@ -22,6 +22,7 @@ import { Button } from "../../components/Form/Button";
 import { TransactionTypeButton } from "../../components/Form/TransactionTypeButton";
 import { CategorySelectButtonn } from "../../components/Form/CategorySelect";
 import { CategorySelect } from "../CategorySelect";
+import { useAuth } from "../../hooks/auth";
 
 interface formData {
   name: string;
@@ -38,7 +39,7 @@ const schema = Yup.object().shape({
     .required("O valor é obrigatório"),
 });
 export function Register() {
-  
+  const {user} = useAuth();
   const [category, setCategory] = useState({
     key: "category",
     name: "Categoria",
@@ -78,7 +79,7 @@ export function Register() {
       date: new Date(),
     };
     try {
-      const dataKey = "@gofinances:transactions";
+      const dataKey = `@gofinances:transactions_user${user.id}`;
       const data = await AsyncStorage.getItem(dataKey);
       const currentData = data ? JSON.parse(data) : [];
       const dataFormatted = [...currentData, newTransaction];

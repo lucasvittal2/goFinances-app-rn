@@ -20,7 +20,7 @@ import { SignIn } from './src/screens/SignIn';
 
 import React from 'react';
 import { StatusBar } from "react-native";
-import { AuthProvider } from './src/hooks/auth';
+import { AuthProvider, useAuth } from './src/hooks/auth';
 export default function App() {
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
@@ -28,7 +28,8 @@ export default function App() {
     Poppins_700Bold,
     Righteous_400Regular,
   });
-  if (!fontsLoaded) {
+  const { userStorageLoading }  = useAuth();
+  if (!fontsLoaded || userStorageLoading) {
     return <AppLoading />;
   }
   return (
