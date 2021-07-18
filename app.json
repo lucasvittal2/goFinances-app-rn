@@ -2,10 +2,17 @@
   "name": "gofinances",
   "displayName": "gofinances",
   "expo": {
-    "name": "gofinances",
-    "slug": "gofinances",
+    "name": "gofinances-rn",
+    "icon": "src/assets/money.png",
+    "slug": "gofinances-rn",
     "scheme": "gofinances",
     "version": "1.0.0",
-    "assetBundlePatterns": ["**/*"]
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "description": "",
+    "android": {
+      "package": "com.lucasvittal.gofinancesrn"
+    }
   }
 }
